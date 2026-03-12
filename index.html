@@ -8,12 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
-            --glass-bg: rgba(10, 10, 10, 0.7);
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -22,227 +16,174 @@
         }
 
         body {
-            background: #000;
+            /* کەڤەری دواوە: تێکەڵەیەک لە ڕەنگی گەش و جوڵاو */
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            overflow: hidden; /* ڕێگری لە سکڕۆڵکردنی زیادە */
+            padding: 40px 20px;
+            overflow-y: auto; /* سکڕۆڵ کار دەکات */
             position: relative;
         }
 
-        /* پاشبنەمای جوڵاو (Animated Mesh Gradient) */
-        .bg-animate {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-        }
-
-        @keyframes gradientMove {
+        @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* تەنۆلکە جوڵاوەکان */
-        .orb {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(50px);
-            z-index: -1;
-            animation: floatOrb 20s infinite alternate;
-        }
-
-        @keyframes floatOrb {
-            from { transform: translate(-20%, -20%); }
-            to { transform: translate(20%, 20%); }
-        }
-
-        /* کارتە ئەکادیمییەکە */
-        .container {
-            max-width: 400px;
+        /* دروستکردنی کەشێکی "کەڤەر" بە تیشکی ڕووناکی */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: var(--glass-bg);
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 420px;
+            width: 100%;
+            /* شوشەیی (Glassmorphism) */
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 40px;
             padding: 50px 30px;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            margin: auto;
         }
 
         /* لۆگۆ */
-        .logo-box {
-            margin-bottom: 25px;
-        }
-        .logo-text {
-            font-size: 70px;
-            font-weight: 800;
-            background: linear-gradient(to bottom, #fff, #94a3b8);
+        .logo-area { margin-bottom: 30px; }
+        .logo-main {
+            font-size: 85px;
+            font-weight: 900;
+            line-height: 1;
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5, #00d2ff);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            line-height: 1;
-            letter-spacing: -2px;
+            animation: shine 3s linear infinite;
         }
 
-        h1 {
-            color: #fff;
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
+        @keyframes shine {
+            to { background-position: 200% center; }
         }
 
-        .subtitle {
-            color: #94a3b8;
-            font-size: 13px;
-            margin-bottom: 35px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        h1 { color: #fff; font-size: 28px; font-weight: 800; margin-bottom: 5px; }
+        .tagline { color: #38bdf8; font-size: 13px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px; }
 
-        /* لیستەی لینکەکان */
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+        /* دوگمە نوێیەکان بە ڕەنگی ئەکادیمی (Dark Blue/Cyan) */
+        .links-container { display: flex; flex-direction: column; gap: 16px; }
 
         .link-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 16px;
-            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 18px;
+            border-radius: 22px;
             display: flex;
             align-items: center;
             text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .link-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #38bdf8;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2);
         }
 
-        .icon-wrap {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
+        .link-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #075985, #0ea5e9);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 20px;
-            margin-left: 15px; /* بۆ لای ڕاست */
+            font-size: 24px;
+            margin-left: 15px;
         }
 
-        .link-info {
-            flex: 1;
-            text-align: right;
-        }
+        .link-details { flex: 1; text-align: right; }
+        .link-title { display: block; color: #fff; font-size: 17px; font-weight: 700; }
+        .link-sub { color: rgba(255, 255, 255, 0.4); font-size: 11px; }
 
-        .link-name {
-            display: block;
-            color: #fff;
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        .link-user {
-            font-size: 11px;
-            color: #64748b;
-        }
-
-        .fa-chevron-left {
-            font-size: 12px;
-            color: #475569;
-        }
+        .chevron { color: rgba(255, 255, 255, 0.2); font-size: 14px; }
     </style>
 </head>
 <body>
 
-    <div class="bg-animate"></div>
-    <div class="orb" style="top: 10%; left: 10%;"></div>
-    <div class="orb" style="bottom: 10%; right: 10%; animation-delay: -5s;"></div>
-
     <div class="container">
-        <div class="logo-box">
-            <div class="logo-text">W</div>
-            <p style="color: #6366f1; font-weight: bold; font-size: 12px;">WASHAN MEDIA</p>
+        <div class="logo-area">
+            <div class="logo-main">W</div>
+            <h1>وەشەن میدیا</h1>
+            <p class="tagline">WASHAN MEDIA OFFICIAL</p>
         </div>
 
-        <h1>وەشەن میدیا</h1>
-        <p class="subtitle">تۆڕی فەرمی وەشەن</p>
-
-        <div class="links">
+        <div class="links-container">
             <a href="https://www.tiktok.com/@washanmedia" class="link-card">
-                <div class="icon-wrap"><i class="fab fa-tiktok"></i></div>
-                <div class="link-info">
-                    <span class="link-name">تیک تۆک</span>
-                    <span class="link-user">@washanmedia</span>
+                <div class="link-icon"><i class="fab fa-tiktok"></i></div>
+                <div class="link-details">
+                    <span class="link-title">تیک تۆک</span>
+                    <span class="link-sub">فۆڵۆومان بکەن لە تیک تۆک</span>
                 </div>
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left chevron"></i>
             </a>
 
             <a href="https://www.facebook.com/share/18dSJLZmDo/" class="link-card">
-                <div class="icon-wrap"><i class="fab fa-facebook-f"></i></div>
-                <div class="link-info">
-                    <span class="link-name">فەیسبووک</span>
-                    <span class="link-user">Washan Media Official</span>
+                <div class="link-icon"><i class="fab fa-facebook-f"></i></div>
+                <div class="link-details">
+                    <span class="link-title">فەیسبووک</span>
+                    <span class="link-sub">پەیجی فەرمی وەشەن میدیا</span>
                 </div>
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left chevron"></i>
             </a>
 
             <a href="https://www.instagram.com/washan_media" class="link-card">
-                <div class="icon-wrap"><i class="fab fa-instagram"></i></div>
-                <div class="link-info">
-                    <span class="link-name">ئینستاگرام</span>
-                    <span class="link-user">@washan_media</span>
+                <div class="link-icon"><i class="fab fa-instagram"></i></div>
+                <div class="link-details">
+                    <span class="link-title">ئینستاگرام</span>
+                    <span class="link-sub">نوێترین چالاکییەکان ببینن</span>
                 </div>
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left chevron"></i>
             </a>
 
             <a href="https://youtube.com/@washanmedia1" class="link-card">
-                <div class="icon-wrap"><i class="fab fa-youtube"></i></div>
-                <div class="link-info">
-                    <span class="link-name">یوتیوب</span>
-                    <span class="link-user">Washan Media</span>
+                <div class="link-icon"><i class="fab fa-youtube"></i></div>
+                <div class="link-details">
+                    <span class="link-title">یوتیوب</span>
+                    <span class="link-sub">بینەری ڤیدیۆکانمان بن</span>
                 </div>
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left chevron"></i>
             </a>
 
             <a href="https://wa.me/9647515372521" class="link-card">
-                <div class="icon-wrap"><i class="fab fa-whatsapp"></i></div>
-                <div class="link-info">
-                    <span class="link-name">واتسئاپ</span>
-                    <span class="link-user">پەیوەندی ڕاستەوخۆ</span>
+                <div class="link-icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="link-details">
+                    <span class="link-title">واتسئاپ</span>
+                    <span class="link-sub">پەیوەندی ڕاستەوخۆ و ڕیکلام</span>
                 </div>
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left chevron"></i>
             </a>
         </div>
 
-        <p style="margin-top: 40px; color: #475569; font-size: 10px;">© 2026 WASHAN MEDIA. ALL RIGHTS RESERVED.</p>
+        <p style="margin-top: 40px; color: rgba(255,255,255,0.2); font-size: 10px; letter-spacing: 1px;">DEVELOPED FOR WASHAN MEDIA © 2026</p>
     </div>
 
 </body>
