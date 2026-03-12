@@ -3,145 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وەشەن میدیا | Washan Media</title>
+    <title>وەشەن میدیا - لینکەکانم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Vazirmatn', sans-serif;
-        }
-
-        /* پاشبنەمایەکی جوڵاو وەک کەڤەر */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background: linear-gradient(-45deg, #020617, #1e1b4b, #312e81, #020617);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a; /* ڕەنگە ڕەشە تۆخەکەی خۆت */
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* ڕێگەدان بە دەرکەوتنی ناوەڕۆک لە سەرەوە */
-            padding: 40px 20px;
-            overflow-y: auto; /* سکڕۆڵ بۆ خوارەوە */
-            color: white;
+            align-items: flex-start; /* چارەسەری نەجوڵان */
+            padding: 20px;
+            direction: rtl;
+            overflow-y: auto; /* سکڕۆڵ کار دەکات */
         }
 
-        @keyframes gradientBG {
+        /* بەکگراوەندی ئەسڵی خۆت کە gradient-ەکەی لەسەرە */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, #00c8ff, #667eea, #764ba2, #00c8ff);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
         .container {
-            max-width: 420px;
+            max-width: 480px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(20, 20, 20, 0.8);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 35px;
-            padding: 40px 25px;
+            border-radius: 30px;
+            padding: 40px 30px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            margin: 20px 0; /* بۆ ئەوەی لەسەرەوە و خوارەوە کەمێک بۆشایی هەبێت */
+            margin: 20px 0;
         }
 
-        .logo-main {
-            font-size: 80px;
-            font-weight: 900;
-            background: linear-gradient(to bottom, #fff, #38bdf8);
+        .logo-circle {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #222, #000);
+            margin: 0 auto 20px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            border: 2px solid #00c8ff;
+        }
+
+        .logo-w {
+            font-size: 70px; font-weight: 900;
+            background: linear-gradient(135deg, #00c8ff, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
         }
 
-        h1 { font-size: 26px; margin-bottom: 5px; }
-        .tagline { color: #38bdf8; font-size: 12px; letter-spacing: 2px; margin-bottom: 30px; }
+        h1 { color: #ffffff; font-size: 32px; margin-bottom: 8px; }
+        .subtitle { color: #00c8ff; font-size: 16px; margin-bottom: 25px; }
 
-        .links-container { display: flex; flex-direction: column; gap: 12px; }
-
-        .link-card {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 16px;
-            border-radius: 20px;
+        .links { display: flex; flex-direction: column; gap: 15px; }
+        .link-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 20px;
+            text-decoration: none;
             display: flex;
             align-items: center;
-            text-decoration: none;
+            gap: 15px;
             color: white;
             transition: 0.3s;
         }
 
-        .link-card:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #38bdf8;
-            transform: translateY(-2px);
+        .link-button:hover {
+            background: rgba(0, 200, 255, 0.1);
+            border-color: #00c8ff;
         }
 
         .link-icon {
-            width: 45px;
-            height: 45px;
-            background: #0ea5e9;
+            width: 50px; height: 50px;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
         }
-
-        .link-details { flex: 1; text-align: right; }
-        .link-title { display: block; font-weight: 700; font-size: 15px; }
-        .link-sub { font-size: 11px; color: #94a3b8; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="logo-main">W</div>
-        <h1>وەشەن میدیا</h1>
-        <p class="tagline">WASHAN MEDIA OFFICIAL</p>
-
-        <div class="links-container">
-            <a href="https://www.tiktok.com/@washanmedia" class="link-card">
-                <div class="link-icon"><i class="fab fa-tiktok"></i></div>
-                <div class="link-details">
-                    <span class="link-title">تیک تۆک</span>
-                    <span class="link-sub">@washanmedia</span>
-                </div>
-            </a>
-            <a href="https://www.facebook.com/share/18dSJLZmDo/" class="link-card">
-                <div class="link-icon"><i class="fab fa-facebook-f"></i></div>
-                <div class="link-details">
-                    <span class="link-title">فەیسبووک</span>
-                    <span class="link-sub">پەیجی فەرمی وەشەن</span>
-                </div>
-            </a>
-            <a href="https://www.instagram.com/washan_media" class="link-card">
-                <div class="link-icon"><i class="fab fa-instagram"></i></div>
-                <div class="link-details">
-                    <span class="link-title">ئینستاگرام</span>
-                    <span class="link-sub">@washan_media</span>
-                </div>
-            </a>
-            <a href="https://youtube.com/@washanmedia1" class="link-card">
-                <div class="link-icon"><i class="fab fa-youtube"></i></div>
-                <div class="link-details">
-                    <span class="link-title">یوتیوب</span>
-                    <span class="link-sub">سەبسکرایبمان بکەن</span>
-                </div>
-            </a>
-            <a href="https://wa.me/9647515372521" class="link-card">
-                <div class="link-icon"><i class="fab fa-whatsapp"></i></div>
-                <div class="link-details">
-                    <span class="link-title">واتسئاپ</span>
-                    <span class="link-sub">پەیوەندی ڕاستەوخۆ</span>
-                </div>
-            </a>
+        <div class="logo-circle">
+            <div class="logo-w">W</div>
         </div>
+        <h1>وەشەن میدیا</h1>
+        <p class="subtitle">تۆڕی سۆشیال میدیای وەشەن</p>
 
-        <p style="margin-top: 30px; font-size: 10px; color: #475569;">© 2026 WASHAN MEDIA. ALL RIGHTS RESERVED.</p>
+        <div class="links">
+            <a href="#" class="link-button">
+                <div class="link-icon" style="background: #25D366;"><i class="fab fa-whatsapp"></i></div>
+                <div><strong>واتسئاپ</strong></div>
+            </a>
+            <a href="#" class="link-button">
+                <div class="link-icon" style="background: #FF0000;"><i class="fab fa-youtube"></i></div>
+                <div><strong>یوتیوب</strong></div>
+            </a>
+            </div>
     </div>
 
 </body>
