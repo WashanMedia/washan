@@ -3,238 +3,247 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وەشەن میدیا - Washan Media</title>
+    <title>وەشەن میدیا | Washan Media</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --glass-bg: rgba(10, 10, 10, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Vazirmatn', sans-serif;
         }
+
         body {
-            background: #050505;
+            background: #000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            direction: rtl;
-            overflow: hidden;
+            overflow: hidden; /* ڕێگری لە سکڕۆڵکردنی زیادە */
             position: relative;
         }
 
-        /* پاشبنەمایەکی ئەنیمەیت کراو */
-        body::before {
-            content: '';
+        /* پاشبنەمای جوڵاو (Animated Mesh Gradient) */
+        .bg-animate {
             position: fixed;
-            inset: 0;
-            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #050505 100%);
-            z-index: -2;
-        }
-
-        .particle {
-            position: fixed;
-            background: linear-gradient(135deg, #00c8ff, #764ba2);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            filter: blur(1px);
-        }
-
-        .container {
-            max-width: 420px;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 35px;
-            padding: 45px 25px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            z-index: 1;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #0f172a, #1e1b4b, #2e1065, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
         }
 
-        /* ستایلی لۆگۆ */
-        .profile { margin-bottom: 35px; }
-        .logo-circle {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border: 2px solid rgba(0, 200, 255, 0.2);
-            box-shadow: 0 0 30px rgba(0, 200, 255, 0.1);
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        .logo-w {
-            font-size: 65px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #00e5ff, #764ba2);
+
+        /* تەنۆلکە جوڵاوەکان */
+        .orb {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: -1;
+            animation: floatOrb 20s infinite alternate;
+        }
+
+        @keyframes floatOrb {
+            from { transform: translate(-20%, -20%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* کارتە ئەکادیمییەکە */
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border-color);
+            border-radius: 40px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* لۆگۆ */
+        .logo-box {
+            margin-bottom: 25px;
+        }
+        .logo-text {
+            font-size: 70px;
+            font-weight: 800;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1;
-        }
-        .logo-subtitle { 
-            font-size: 11px; 
-            color: rgba(255,255,255,0.7); 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            margin-top: 5px;
+            letter-spacing: -2px;
         }
 
-        h1 { color: #fff; font-size: 30px; font-weight: 700; margin-bottom: 8px; }
-        .subtitle { 
-            color: #00c8ff; 
-            font-size: 14px; 
-            font-weight: 400; 
-            margin-bottom: 30px;
+        h1 {
+            color: #fff;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 5px;
             letter-spacing: 0.5px;
         }
 
-        /* ستایلی یەکگرتووی لینکەکان */
-        .links { display: flex; flex-direction: column; gap: 14px; }
-        .link-button {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 22px;
-            padding: 18px 22px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .link-button:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(0, 200, 255, 0.6);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 200, 255, 0.15);
+        .subtitle {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        .link-icon {
-            width: 48px;
-            height: 48px;
+        /* لیستەی لینکەکان */
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 16px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.03);
+        }
+
+        .icon-wrap {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
             color: #fff;
-            background: linear-gradient(135deg, #00c8ff, #764ba2);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            flex-shrink: 0;
+            font-size: 20px;
+            margin-left: 15px; /* بۆ لای ڕاست */
         }
 
-        .link-text { flex: 1; text-align: right; }
-        .link-title { font-size: 17px; font-weight: 700; color: #fff; }
-        .link-subtitle { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-        .link-arrow { color: rgba(255,255,255,0.15); font-size: 18px; transition: 0.3s; }
-        .link-button:hover .link-arrow { color: #00c8ff; transform: translateX(-5px); }
+        .link-info {
+            flex: 1;
+            text-align: right;
+        }
 
-        /* ئەنیمەیشنی پاشبنەما */
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 0; }
-            20% { opacity: 0.5; }
-            80% { opacity: 0.5; }
-            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        .link-name {
+            display: block;
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .link-user {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .fa-chevron-left {
+            font-size: 12px;
+            color: #475569;
         }
     </style>
 </head>
 <body>
 
+    <div class="bg-animate"></div>
+    <div class="orb" style="top: 10%; left: 10%;"></div>
+    <div class="orb" style="bottom: 10%; right: 10%; animation-delay: -5s;"></div>
+
     <div class="container">
-        <div class="profile">
-            <div class="logo-circle">
-                <div class="logo-w">W</div>
-                <div class="logo-subtitle">Washan Media</div>
-            </div>
-            <h1>وەشەن میدیا</h1>
-            <p class="subtitle">وەشانێکی نوێ لە دنیای میدیا</p>
+        <div class="logo-box">
+            <div class="logo-text">W</div>
+            <p style="color: #6366f1; font-weight: bold; font-size: 12px;">WASHAN MEDIA</p>
         </div>
+
+        <h1>وەشەن میدیا</h1>
+        <p class="subtitle">تۆڕی فەرمی وەشەن</p>
 
         <div class="links">
-            <a href="https://www.tiktok.com/@washanmedia" class="link-button" target="_blank">
-                <div class="link-icon"><i class="fab fa-tiktok"></i></div>
-                <div class="link-text">
-                    <div class="link-title">تیک تۆک</div>
-                    <div class="link-subtitle">@washanmedia</div>
+            <a href="https://www.tiktok.com/@washanmedia" class="link-card">
+                <div class="icon-wrap"><i class="fab fa-tiktok"></i></div>
+                <div class="link-info">
+                    <span class="link-name">تیک تۆک</span>
+                    <span class="link-user">@washanmedia</span>
                 </div>
-                <div class="link-arrow"><i class="fas fa-chevron-left"></i></div>
+                <i class="fas fa-chevron-left"></i>
             </a>
 
-            <a href="https://www.facebook.com/share/18dSJLZmDo/" class="link-button" target="_blank">
-                <div class="link-icon"><i class="fab fa-facebook-f"></i></div>
-                <div class="link-text">
-                    <div class="link-title">فەیسبووک</div>
-                    <div class="link-subtitle">پەیجی فەرمی وەشەن</div>
+            <a href="https://www.facebook.com/share/18dSJLZmDo/" class="link-card">
+                <div class="icon-wrap"><i class="fab fa-facebook-f"></i></div>
+                <div class="link-info">
+                    <span class="link-name">فەیسبووک</span>
+                    <span class="link-user">Washan Media Official</span>
                 </div>
-                <div class="link-arrow"><i class="fas fa-chevron-left"></i></div>
+                <i class="fas fa-chevron-left"></i>
             </a>
 
-            <a href="https://www.instagram.com/washan_media" class="link-button" target="_blank">
-                <div class="link-icon"><i class="fab fa-instagram"></i></div>
-                <div class="link-text">
-                    <div class="link-title">ئینستاگرام</div>
-                    <div class="link-subtitle">@washan_media</div>
+            <a href="https://www.instagram.com/washan_media" class="link-card">
+                <div class="icon-wrap"><i class="fab fa-instagram"></i></div>
+                <div class="link-info">
+                    <span class="link-name">ئینستاگرام</span>
+                    <span class="link-user">@washan_media</span>
                 </div>
-                <div class="link-arrow"><i class="fas fa-chevron-left"></i></div>
+                <i class="fas fa-chevron-left"></i>
             </a>
 
-            <a href="https://youtube.com/@washanmedia1" class="link-button" target="_blank">
-                <div class="link-icon"><i class="fab fa-youtube"></i></div>
-                <div class="link-text">
-                    <div class="link-title">یوتیوب</div>
-                    <div class="link-subtitle">سەبسکرایبمان بکەن</div>
+            <a href="https://youtube.com/@washanmedia1" class="link-card">
+                <div class="icon-wrap"><i class="fab fa-youtube"></i></div>
+                <div class="link-info">
+                    <span class="link-name">یوتیوب</span>
+                    <span class="link-user">Washan Media</span>
                 </div>
-                <div class="link-arrow"><i class="fas fa-chevron-left"></i></div>
+                <i class="fas fa-chevron-left"></i>
             </a>
 
-            <a href="https://wa.me/9647515372521" class="link-button" target="_blank">
-                <div class="link-icon"><i class="fab fa-whatsapp"></i></div>
-                <div class="link-text">
-                    <div class="link-title">واتسئاپ</div>
-                    <div class="link-subtitle">بۆ پەیوەندی و ڕیکلام</div>
+            <a href="https://wa.me/9647515372521" class="link-card">
+                <div class="icon-wrap"><i class="fab fa-whatsapp"></i></div>
+                <div class="link-info">
+                    <span class="link-name">واتسئاپ</span>
+                    <span class="link-user">پەیوەندی ڕاستەوخۆ</span>
                 </div>
-                <div class="link-arrow"><i class="fas fa-chevron-left"></i></div>
+                <i class="fas fa-chevron-left"></i>
             </a>
         </div>
+
+        <p style="margin-top: 40px; color: #475569; font-size: 10px;">© 2026 WASHAN MEDIA. ALL RIGHTS RESERVED.</p>
     </div>
 
-    <script>
-        // دروستکردنی پارتی کڵەکان بۆ پاشبنەما
-        const particleCount = 15;
-        for(let i = 0; i < particleCount; i++) {
-            let p = document.createElement('div');
-            p.className = 'particle';
-            let size = Math.random() * 4 + 2;
-            p.style.width = size + 'px';
-            p.style.height = size + 'px';
-            p.style.left = Math.random() * 100 + '%';
-            p.style.top = Math.random() * 100 + '%';
-            p.style.opacity = Math.random() * 0.5;
-            
-            // ئەنیمەیشنێکی نەرم بۆ جوڵە
-            p.animate([
-                { transform: 'translateY(0) translateX(0)', opacity: 0 },
-                { opacity: 0.5, offset: 0.2 },
-                { transform: `translateY(-${Math.random() * 200 + 100}px) translateX(${Math.random() * 50 - 25}px)`, opacity: 0 }
-            ], {
-                duration: 5000 + Math.random() * 5000,
-                iterations: Infinity,
-                easing: 'ease-in-out',
-                delay: Math.random() * 5000
-            });
-            
-            document.body.appendChild(p);
-        }
-    </script>
 </body>
 </html>
