@@ -6,38 +6,50 @@
     <title>وەشەن میدیا - لینکەکانم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a; /* ڕەنگە ڕەشە تۆخەکەی خۆت */
+            background: #0a0a0a;
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* چارەسەری نەجوڵان */
+            align-items: center;
             padding: 20px;
             direction: rtl;
-            overflow-y: auto; /* سکڕۆڵ کار دەکات */
+            position: relative;
+            overflow-x: hidden;
         }
-
-        /* بەکگراوەندی ئەسڵی خۆت کە gradient-ەکەی لەسەرە */
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(45deg, #00c8ff, #667eea, #764ba2, #00c8ff);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             opacity: 0.15;
-            z-index: -1;
+            z-index: 0;
         }
-
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 200, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
         .container {
             max-width: 480px;
             width: 100%;
@@ -46,34 +58,142 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 30px;
             padding: 40px 30px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 80px rgba(0, 200, 255, 0.2);
             text-align: center;
-            margin: 20px 0;
+            animation: containerFadeIn 1s ease;
+            position: relative;
+            z-index: 1;
         }
-
-        .logo-circle {
-            width: 140px; height: 140px;
+        @keyframes containerFadeIn {
+            from { opacity: 0; transform: translateY(50px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .profile {
+            margin-bottom: 35px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .profile::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            background: conic-gradient(from 0deg, #00c8ff, #667eea, #764ba2, #00c8ff);
             border-radius: 50%;
-            background: linear-gradient(145deg, #222, #000);
-            margin: 0 auto 20px;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            border: 2px solid #00c8ff;
+            animation: rotate 4s linear infinite;
+            opacity: 0.6;
+            filter: blur(10px);
         }
-
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        .profile-image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+            animation: float 3s ease-in-out infinite;
+        }
+        .logo-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #4a3a32, #2d231d);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border: 4px solid transparent;
+            background-clip: padding-box;
+            overflow: visible;
+        }
+        .logo-circle::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #00c8ff, #5a67d8, #764ba2, #bc4ba2, #00c8ff);
+            filter: blur(20px);
+            opacity: 0.6;
+            z-index: -1;
+            animation: rotateGlow 8s linear infinite;
+        }
+        @keyframes rotateGlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
         .logo-w {
-            font-size: 70px; font-weight: 900;
-            background: linear-gradient(135deg, #00c8ff, #764ba2);
+            font-size: 70px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00e5ff, #00c8ff, #0096ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1;
+            filter: drop-shadow(0 5px 15px rgba(0, 200, 255, 0.6));
+            animation: logoPulse 3s ease-in-out infinite;
         }
-
-        h1 { color: #ffffff; font-size: 32px; margin-bottom: 8px; }
-        .subtitle { color: #00c8ff; font-size: 16px; margin-bottom: 25px; }
-
-        .links { display: flex; flex-direction: column; gap: 15px; }
+        .logo-subtitle {
+            font-size: 11px;
+            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+        @keyframes logoPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-shadow: 0 0 20px rgba(0, 200, 255, 0.5);
+        }
+        .subtitle {
+            color: #00c8ff;
+            font-size: 16px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        .warning-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(251, 191, 36, 0.15));
+            border-right: 3px solid #f59e0b;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: #fbbf24;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
         .link-button {
             background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 18px;
             padding: 20px;
@@ -81,43 +201,196 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            color: white;
-            transition: 0.3s;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
         }
-
         .link-button:hover {
-            background: rgba(0, 200, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
             border-color: #00c8ff;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 200, 255, 0.3);
         }
-
+        .link-button:active {
+            transform: scale(0.96);
+        }
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+        .link-button:hover::before {
+            left: 100%;
+        }
         .link-icon {
-            width: 50px; height: 50px;
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px;
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+        .link-button:hover .link-icon {
+            transform: scale(1.15) rotate(-5deg);
+        }
+        .link-text { flex: 1; text-align: right; z-index: 1; }
+        .link-title { font-size: 17px; font-weight: 700; color: #ffffff; }
+        .link-subtitle { font-size: 13px; color: #a0a0a0; }
+        .link-arrow { font-size: 20px; color: #666; transition: 0.4s; }
+        .link-button:hover .link-arrow { color: #00c8ff; transform: translateX(-8px); }
+
+        .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .facebook { background: #1877f2; }
+        .tiktok { background: linear-gradient(135deg, #00f2ea, #ff0050); }
+        .whatsapp { background: #25D366; }
+        .youtube { background: #FF0000; }
+
+        .info-button {
+            position: fixed; top: 20px; left: 20px; width: 50px; height: 50px;
+            background: linear-gradient(135deg, #00c8ff, #667eea);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1000; box-shadow: 0 5px 20px rgba(0, 200, 255, 0.4);
+        }
+        .modal {
+            display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1a1a1a; border-radius: 25px; padding: 40px 35px; max-width: 600px;
+            width: 90%; max-height: 80vh; overflow-y: auto; border: 1px solid rgba(0, 200, 255, 0.3); color: white;
+        }
+        .close-button {
+            background: rgba(255, 255, 255, 0.1); border: none; border-radius: 50%;
+            width: 40px; height: 40px; color: white; cursor: pointer; float: left;
+        }
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="logo-circle">
-            <div class="logo-w">W</div>
-        </div>
-        <h1>وەشەن میدیا</h1>
-        <p class="subtitle">تۆڕی سۆشیال میدیای وەشەن</p>
-
-        <div class="links">
-            <a href="#" class="link-button">
-                <div class="link-icon" style="background: #25D366;"><i class="fab fa-whatsapp"></i></div>
-                <div><strong>واتسئاپ</strong></div>
-            </a>
-            <a href="#" class="link-button">
-                <div class="link-icon" style="background: #FF0000;"><i class="fab fa-youtube"></i></div>
-                <div><strong>یوتیوب</strong></div>
-            </a>
-            </div>
+    <div class="info-button" onclick="openModal()">
+        <i class="fas fa-info"></i>
     </div>
 
+    <div class="modal" id="infoModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-button" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <h2 style="color: #00c8ff; margin-bottom: 20px;">دەربارەی وەشەن میدیا</h2>
+            
+            <p style="color: #fbbf24; font-weight: bold; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid rgba(251, 191, 36, 0.3); padding-bottom: 5px;">خاوەنی ئەم کەناڵە سەرهەنگ میرانبەگ</p>
+            
+            <p>وەشەن میدیا لە 6-ی تشرینی دووەم 2023 دامەزراوە.</p>
+            <p style="margin-top: 15px;">ئەم میدیایە وەک کەناڵێکی نا فەرمی کار دەکات، بەڵام کەناڵی تەلەفزیۆنی نییە، مایکرۆفۆن و کارمەندی هەیە، بەڵام لە جیاتی کەناڵی تەلەفزیۆنی، پەڕەیەکی گەورەی فەرمی لە تەواوی تۆڕە کۆمەڵایەتیەکان هەیە و چالاکیەکانی لەوێ بڵاو دەکاتەوە.</p>
+            
+            <h3 style="color: #00c8ff; margin-top: 25px;">ئەندامانی تیم</h3>
+            <ul style="list-style: none; padding-top: 10px;">
+                <li style="margin-bottom: 8px;">✓ ئەحمەد زوبێر: کامیرامان</li>
+                <li style="margin-bottom: 8px;">✓ ئەژین حەسەن: مۆنتاژکار</li>
+                <li style="margin-bottom: 8px;">✓ میدیا ئەحمەد: پەیامنێر</li>
+                <li style="margin-bottom: 8px;">✓ ئامینە کاوە: بەشی دەنگ و خوێندنەوە</li>
+                <li style="margin-bottom: 8px;">✓ لینا تاهیر: هەواڵساز</li>
+                <li style="margin-bottom: 8px;">✓ ئەژیر موحسین: مۆنتاژ کار و پەیامنێر</li>
+                <li style="margin-bottom: 8px;">✓ سەرۆک پشتیوان: پەیامنێر</li>
+                <li style="margin-bottom: 8px;">✓ شەرمین ڕەواندزی: پێشکەشکەر</li>
+                <li style="margin-bottom: 8px;">✓ خەلیل مهاجیر: پەیامنێر</li>
+                <li style="margin-bottom: 8px;">✓ ئارام عیماد: پەیامنێر</li>
+            </ul>
+            
+            <h3 style="color: #00c8ff; margin-top: 25px;">نموونەی کارەکانمان</h3>
+            <p>لە بواری هونەریدا چەندین کارمان ئەنجام داوە، پیشاندانی هێزی گەنجان و کار و داهێنانەکانیان و ناساندنیان، کۆبوونەوە لەگەڵ شاعیران، دیوانەی دکتۆران و کەسایەتیە ناسراوەکان، کارکردن بۆ کوردستانێکی باشتر و پێشکەوتوو تر.</p>
+            <p style="margin-top: 25px; text-align: center; font-size: 18px; color: #00c8ff; font-weight: 600;">وەشەن میدیا وەشانێکی نوێ.....</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="profile">
+            <div class="profile-image">
+                <div class="logo-circle">
+                    <div class="logo-w">W</div>
+                    <div class="logo-subtitle">washan media</div>
+                </div>
+            </div>
+            <h1>وەشەن میدیا</h1>
+            <p class="subtitle">تۆڕی سۆشیال میدیای (وەشەن میدیا)</p>
+        </div>
+        <div class="warning-box">
+            <i class="fas fa-shield-alt"></i>
+            <span>وەشەن میدیا تەنها لەم ئەپانە بەرپرسە</span>
+        </div>
+        <div class="links">
+            <a href="https://www.tiktok.com/@washanmedia" class="link-button" target="_blank">
+                <div class="link-icon tiktok"><i class="fab fa-tiktok"></i></div>
+                <div class="link-text">
+                    <div class="link-title">TikTok</div>
+                    <div class="link-subtitle">@washanmedia</div>
+                </div>
+                <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+            <a href="https://www.facebook.com/share/18dSJLZmDo/" class="link-button" target="_blank">
+                <div class="link-icon facebook"><i class="fab fa-facebook-f"></i></div>
+                <div class="link-text">
+                    <div class="link-title">Facebook</div>
+                    <div class="link-subtitle">پەیجی فەیسبووک</div>
+                </div>
+                <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+            <a href="https://www.instagram.com/washan_media" class="link-button" target="_blank">
+                <div class="link-icon instagram"><i class="fab fa-instagram"></i></div>
+                <div class="link-text">
+                    <div class="link-title">Instagram</div>
+                    <div class="link-subtitle">@washan_media</div>
+                </div>
+                <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+            <a href="https://wa.me/9647515372521" class="link-button" target="_blank">
+                <div class="link-icon whatsapp"><i class="fab fa-whatsapp"></i></div>
+                <div class="link-text">
+                    <div class="link-title">WhatsApp</div>
+                    <div class="link-subtitle">پەیوەندی ڕاستەوخۆ</div>
+                </div>
+                <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+            <a href="https://youtube.com/@washanmedia1" class="link-button" target="_blank">
+                <div class="link-icon youtube"><i class="fab fa-youtube"></i></div>
+                <div class="link-text">
+                    <div class="link-title">YouTube</div>
+                    <div class="link-subtitle">@washanmedia1</div>
+                </div>
+                <div class="link-arrow"><i class="fas fa-arrow-left"></i></div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function openModal() { document.getElementById('infoModal').classList.add('active'); }
+        function closeModal(event) { if (!event || event.target.id === 'infoModal' || event.target.closest('.close-button')) { document.getElementById('infoModal').classList.remove('active'); } }
+        
+        for(let i = 0; i < 30; i++) {
+            let particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animation = `floatParticle ${5 + Math.random() * 10}s linear infinite`;
+            document.body.appendChild(particle);
+        }
+    </script>
 </body>
 </html>
+هەندێک پێشبینم پێبلێ لەسەر ئەم کۆدە
