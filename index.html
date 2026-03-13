@@ -191,9 +191,9 @@
             gap: 15px;
         }
         .link-button {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 18px;
             padding: 20px;
@@ -207,12 +207,15 @@
         }
         .link-button:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: #00c8ff;
+            border-color: rgba(0, 200, 255, 0.4);
             transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 200, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 200, 255, 0.2);
         }
         .link-button:active {
             transform: scale(0.96);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(25px);
+            border-color: #00c8ff;
         }
         .link-button::before {
             content: '';
@@ -256,25 +259,6 @@
         .whatsapp { background: #25D366; }
         .youtube { background: #FF0000; }
 
-        .info-button {
-            position: fixed; top: 20px; left: 20px; width: 50px; height: 50px;
-            background: linear-gradient(135deg, #00c8ff, #667eea);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 1000; box-shadow: 0 5px 20px rgba(0, 200, 255, 0.4);
-        }
-        .modal {
-            display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center;
-        }
-        .modal.active { display: flex; }
-        .modal-content {
-            background: #1a1a1a; border-radius: 25px; padding: 40px 35px; max-width: 600px;
-            width: 90%; max-height: 80vh; overflow-y: auto; border: 1px solid rgba(0, 200, 255, 0.3); color: white;
-        }
-        .close-button {
-            background: rgba(255, 255, 255, 0.1); border: none; border-radius: 50%;
-            width: 40px; height: 40px; color: white; cursor: pointer; float: left;
-        }
         @keyframes floatParticle {
             0% { transform: translateY(0) translateX(0); opacity: 0; }
             10% { opacity: 1; }
@@ -284,40 +268,6 @@
     </style>
 </head>
 <body>
-
-    <div class="info-button" onclick="openModal()">
-        <i class="fas fa-info"></i>
-    </div>
-
-    <div class="modal" id="infoModal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-button" onclick="closeModal()"><i class="fas fa-times"></i></button>
-            <h2 style="color: #00c8ff; margin-bottom: 20px;">دەربارەی وەشەن میدیا</h2>
-            
-            <p style="color: #fbbf24; font-weight: bold; font-size: 18px; margin-bottom: 15px; border-bottom: 1px solid rgba(251, 191, 36, 0.3); padding-bottom: 5px;">خاوەنی ئەم کەناڵە سەرهەنگ میرانبەگ</p>
-            
-            <p>وەشەن میدیا لە 6-ی تشرینی دووەم 2023 دامەزراوە.</p>
-            <p style="margin-top: 15px;">ئەم میدیایە وەک کەناڵێکی نا فەرمی کار دەکات، بەڵام کەناڵی تەلەفزیۆنی نییە، مایکرۆفۆن و کارمەندی هەیە، بەڵام لە جیاتی کەناڵی تەلەفزیۆنی، پەڕەیەکی گەورەی فەرمی لە تەواوی تۆڕە کۆمەڵایەتیەکان هەیە و چالاکیەکانی لەوێ بڵاو دەکاتەوە.</p>
-            
-            <h3 style="color: #00c8ff; margin-top: 25px;">ئەندامانی تیم</h3>
-            <ul style="list-style: none; padding-top: 10px;">
-                <li style="margin-bottom: 8px;">✓ ئەحمەد زوبێر: کامیرامان</li>
-                <li style="margin-bottom: 8px;">✓ ئەژین حەسەن: مۆنتاژکار</li>
-                <li style="margin-bottom: 8px;">✓ میدیا ئەحمەد: پەیامنێر</li>
-                <li style="margin-bottom: 8px;">✓ ئامینە کاوە: بەشی دەنگ و خوێندنەوە</li>
-                <li style="margin-bottom: 8px;">✓ لینا تاهیر: هەواڵساز</li>
-                <li style="margin-bottom: 8px;">✓ ئەژیر موحسین: مۆنتاژ کار و پەیامنێر</li>
-                <li style="margin-bottom: 8px;">✓ سەرۆک پشتیوان: پەیامنێر</li>
-                <li style="margin-bottom: 8px;">✓ شەرمین ڕەواندزی: پێشکەشکەر</li>
-                <li style="margin-bottom: 8px;">✓ خەلیل مهاجیر: پەیامنێر</li>
-                <li style="margin-bottom: 8px;">✓ ئارام عیماد: پەیامنێر</li>
-            </ul>
-            
-            <h3 style="color: #00c8ff; margin-top: 25px;">نموونەی کارەکانمان</h3>
-            <p>لە بواری هونەریدا چەندین کارمان ئەنجام داوە، پیشاندانی هێزی گەنجان و کار و داهێنانەکانیان و ناساندنیان، کۆبوونەوە لەگەڵ شاعیران، دیوانەی دکتۆران و کەسایەتیە ناسراوەکان، کارکردن بۆ کوردستانێکی باشتر و پێشکەوتوو تر.</p>
-            <p style="margin-top: 25px; text-align: center; font-size: 18px; color: #00c8ff; font-weight: 600;">وەشەن میدیا وەشانێکی نوێ.....</p>
-        </div>
-    </div>
 
     <div class="container">
         <div class="profile">
@@ -379,9 +329,6 @@
     </div>
 
     <script>
-        function openModal() { document.getElementById('infoModal').classList.add('active'); }
-        function closeModal(event) { if (!event || event.target.id === 'infoModal' || event.target.closest('.close-button')) { document.getElementById('infoModal').classList.remove('active'); } }
-        
         for(let i = 0; i < 30; i++) {
             let particle = document.createElement('div');
             particle.className = 'particle';
@@ -393,4 +340,3 @@
     </script>
 </body>
 </html>
-هەندێک پێشبینم پێبلێ لەسەر ئەم کۆدە
